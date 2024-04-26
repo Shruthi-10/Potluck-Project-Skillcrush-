@@ -68,15 +68,22 @@ const updateGuestCount = function () {
 };
 
 const assignItems = function () {
-    const potluckItmes = ["Biriyani", "Fried-Rice", "Raita", "Chicken-65", "Shawarma", "Mutton Kola", "Pulav", "Appalam", "Kheer", "Bread-Halva", "Laddu", "Coconut-Barfi"]
-    const allGuests = document.querySelector(".guest-list li");
+    const potluckItems = ["Biriyani", "Fried-Rice", "Raita", "Chicken-65", "Shawarma", "Mutton Kola", "Pulav", "Appalam", "Kheer", "Bread-Halva", "Laddu", "Coconut-Barfi"]
+    const allGuests = document.querySelectorAll(".guest-list li");
 
     for (let guest of allGuests) {
         let randomPotluckIndex = Math.floor(Math.random() * potluckItems.length);
-        let randomPotluckItem = potluckItmes [randomPotluckIndex];
+        let randomPotluckItem = potluckItems[randomPotluckIndex];
         let listItem = document.createElement("li");
 
         listItem.innerText = `${guest.innerText} is bringing ${randomPotluckItem}.`;
         assignedItems.append(listItem);
+
+        potluckItems.splice(randomPotluckIndex, 1);
     };
 };
+
+assignButton.addEventListener("click", function () {
+    assignItems();
+    assignButton.disabled = true;
+});
